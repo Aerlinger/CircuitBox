@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
-  grunt.loadNpmTasks('grunt-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   // Configurable paths
   var config = {
@@ -255,7 +255,15 @@ module.exports = function (grunt) {
           baseUrl        : '<%= config.app %>/scripts/',
           name           : 'main',
           mainConfigFile : '<%= config.app %>/scripts/main.js',
-          out            : '.tmp/concat/scripts/main.js'
+          out            : '.tmp/concat/scripts/main.js',
+          preserveLicenseComments: false,
+          useStrict: true,
+          wrap: true,
+          mangle: false,
+//          paths: {
+//            requirejs: '../../bower_components/requirejs/require'
+//          },
+          include: '../../bower_components/requirejs/require'
         }
       }
     },

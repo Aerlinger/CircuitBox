@@ -3,7 +3,7 @@ require.config({
     'jquery': '../../bower_components/jquery/dist/jquery',
     'dat': '../../bower_components/dat-gui/build/dat.gui',
     'Sketch': '../../bower_components/sketch.js/js/sketch'
-//    'Circuit': '../scripts/Circuit'
+//    'Circuit': './Circuit'
   },
   shim: {
     'jquery': {
@@ -34,6 +34,22 @@ require(['jquery', 'dat', 'Sketch'], function ($, dat, Sketch) {
   };
 
   window.onload = function () {
+    Sketch.create({
+      setup: function() {
+        this.r = this.g = this.b = random( 100, 200 );
+      },
+      mousemove: function() {
+        this.r = 255 * ( this.mouse.x / this.width );
+        this.g = 255 * ( this.mouse.y / this.height );
+        this.b = 255 * abs( cos( PI * this.mouse.y / this.width ) );
+      },
+      draw: function() {
+        this.fillStyle = 'rgb(' + ~~this.r + ',' + ~~this.g + ',' + ~~this.b + ')';
+        this.fillRect( 0, 0, this.width, this.height );
+      }
+    });
+
+
     var text = new FizzyText();
     var gui = new dat.GUI({
       load: JSON,
@@ -77,8 +93,4 @@ require(['jquery', 'dat', 'Sketch'], function ($, dat, Sketch) {
 
     update();
   };
-
-  $("#test").text("jQuery Loaded");
-
-  console.log(Sketch);
 });
