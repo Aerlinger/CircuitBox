@@ -1,24 +1,31 @@
 require.config({
   paths: {
-    'jquery': 'bower_components/jquery/dist/jquery',
-    'dat-gui': 'bower_components/dat-gui/build/dat.gui',
-    'Circuit': 'scripts/Circuit'
+    'jquery': '../../bower_components/jquery/dist/jquery',
+    'dat': '../../bower_components/dat-gui/build/dat.gui',
+    'Sketch': '../../bower_components/sketch.js/js/sketch'
+//    'Circuit': '../scripts/Circuit'
   },
   shim: {
     'jquery': {
       deps: [],
       exports: '$'
+    },
+    'dat': {
+      deps: [],
+      exports: 'dat'
+    },
+    'Sketch': {
+      deps: [],
+      exports: 'Sketch'
     }
   }
 });
 
-require(['jquery', 'dat-gui', 'Circuit'], function ($, dat, Circuit) {
+require(['jquery', 'dat', 'Sketch'], function ($, dat, Sketch) {
   var FizzyText = function () {
     this.message = 'dat.gui';
     this.speed = 0.8;
     this.displayOutline = false;
-//            this.explode = function() { ... };
-    // Define render logic ...
 
     this.color0 = "#ffae23"; // CSS string
     this.color1 = [ 0, 128, 255 ]; // RGB array
@@ -38,11 +45,6 @@ require(['jquery', 'dat-gui', 'Circuit'], function ($, dat, Circuit) {
     gui.add(text, 'message');
     var speedControl = gui.add(text, 'speed', -5, 5);
     gui.add(text, 'displayOutline');
-//            gui.add(text, 'explode');
-
-//            gui.add(text, 'noiseStrength').step(5); // Increment amount
-//            gui.add(text, 'growthSpeed', -5, 5); // Min and max
-//            gui.add(text, 'maxSize').min(0).step(0.25); // Mix and match
 
     gui.add(text, 'message', [ 'pizza', 'chrome', 'hooray' ]);
 
@@ -50,13 +52,7 @@ require(['jquery', 'dat-gui', 'Circuit'], function ($, dat, Circuit) {
     gui.add(text, 'speed', { Stopped: 0, Slow: 0.1, Fast: 5 });
 
     var f1 = gui.addFolder('Flow Field');
-//            f1.add(text, 'speed');
-//            f1.add(text, 'noiseStrength');
-
     var f2 = gui.addFolder('Letters');
-//            f2.add(text, 'growthSpeed');
-//            f2.add(text, 'maxSize');
-//            f2.add(text, 'message');
 
     f2.open();
 
@@ -71,12 +67,8 @@ require(['jquery', 'dat-gui', 'Circuit'], function ($, dat, Circuit) {
     });
 
     speedControl.onFinishChange(function (value) {
-      // Fires when a controller loses focus.
-//              alert("The new value is " + value);
       console.log("Controller finish change!");
     });
-
-    gui.add(text, 'noiseStrength', 0, 100).listen();
 
     var update = function () {
       requestAnimationFrame(update);
@@ -87,5 +79,6 @@ require(['jquery', 'dat-gui', 'Circuit'], function ($, dat, Circuit) {
   };
 
   $("#test").text("jQuery Loaded");
-  Circuit();
+
+  console.log(Sketch);
 });
