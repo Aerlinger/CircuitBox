@@ -31,7 +31,6 @@ require(['Circuit' ,'app', 'jquery', 'dat', 'Sketch'], function (Circuit, app, $
       }
     });
 
-
     var text = new FizzyText();
     var gui = new dat.GUI({
       load: JSON,

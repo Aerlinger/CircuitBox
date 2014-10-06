@@ -19,8 +19,15 @@
     <!-- include source files here... -->
 
     <!-- include spec files here... -->
-    <script src="spec/test.js"></script>
+    <script data-main="spec/config" src="../bower_components/requirejs/require.js"></script>
 
-    <script>mocha.run()</script>
+    <script src="spec/app_test.js"></script>
+    <script src="spec/test.js"></script>
+    <script src="spec/config.js"></script>
+    <script src="spec/runner.js"></script>
+
+
+    <!--<script>mocha.run()</script>-->
+
 </body>
 </html>

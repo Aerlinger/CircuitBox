@@ -16,7 +16,7 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
-
+  grunt.loadNpmTasks('grunt-mocha');
 
   // Configurable paths
   var config = {
@@ -89,7 +89,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           open: false,
-          port: 9001,
+//          port: 9001,
           middleware: function(connect) {
             return [
               connect.static('.tmp'),
@@ -139,10 +139,16 @@ module.exports = function (grunt) {
 
     // Mocha testing framework configuration options
     mocha: {
+//      test: {
+//        src: ['tests/**/*.html']
+//      },
       all: {
         options: {
           run: true,
+//          run: false,
+          reporter: 'Spec',
           urls: ['http://<%= connect.test.options.hostname %>:<%= connect.test.options.port %>/index.html']
+//          urls: ['http://127.0.0.1:9001/test/index.html']
         }
       }
     },
@@ -345,6 +351,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-concat');
+
 
 
   grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function (target) {
