@@ -15,7 +15,8 @@ module.exports = function (grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
+
+
 
   // Configurable paths
   var config = {
@@ -253,20 +254,18 @@ module.exports = function (grunt) {
       dist: {
         options: {
           baseUrl        : '<%= config.app %>/scripts/',
-          name           : 'main',
-          mainConfigFile : '<%= config.app %>/scripts/main.js',
-          out            : '.tmp/concat/scripts/main.js',
+          mainConfigFile : '<%= config.app %>/scripts/config.js',
+          out: '<%= config.dist %> /scripts/app.min.js',
           preserveLicenseComments: false,
           useStrict: true,
           wrap: true,
+          optimize: 'none',
           mangle: false,
-//          paths: {
-//            requirejs: '../../bower_components/requirejs/require'
-//          },
-          include: '../../bower_components/requirejs/require'
+          include: "../../bower_components/requirejs/require"
         }
       }
     },
+
 
     // By default, your `index.html`'s <!-- Usemin block --> will take care
     // of minification. These next options are pre-configured if you do not
@@ -344,6 +343,9 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+
 
   grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function (target) {
     if (grunt.option('allow-remote')) {
@@ -383,7 +385,9 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('build-rjs', ['requirejs:dist']);
+  grunt.registerTask('build-rjs', [
+    'requirejs:dist'
+  ]);
 
   grunt.registerTask('build', [
     'clean:dist',
@@ -402,9 +406,10 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
+    'concat',
+    'requirejs:dist',
     'newer:jshint',
     'test',
     'build'
   ]);
-
 };

@@ -1,37 +1,15 @@
-require.config({
-  paths: {
-    'jquery': '../../bower_components/jquery/dist/jquery',
-    'dat': '../../bower_components/dat-gui/build/dat.gui',
-    'Sketch': '../../bower_components/sketch.js/js/sketch',
-    'Circuit': '/scripts/Circuit'
-  },
-  shim: {
-    'jquery': {
-      deps: [],
-      exports: '$'
-    },
-    'dat': {
-      deps: [],
-      exports: 'dat'
-    },
-    'Sketch': {
-      deps: [],
-      exports: 'Sketch'
-    },
-    'Circuit': {
-      deps: [],
-      exports: 'Circuit'
-    }
-  }
-});
+require(['Circuit' ,'app', 'jquery', 'dat', 'Sketch'], function (Circuit, app, $, dat, Sketch) {
+  'use strict';
 
-require(['jquery', 'dat', 'Sketch', 'Circuit'], function ($, dat, Sketch, Circuit) {
+  console.log(app);
+  console.log(Circuit);
+
   var FizzyText = function () {
     this.message = 'dat.gui';
     this.speed = 0.8;
     this.displayOutline = false;
 
-    this.color0 = "#ffae23"; // CSS string
+    this.color0 = '#ffae23'; // CSS string
     this.color1 = [ 0, 128, 255 ]; // RGB array
     this.color2 = [ 0, 128, 255, 0.3 ]; // RGB with alpha
     this.color3 = { h: 350, s: 0.9, v: 0.3 }; // Hue, saturation, value
@@ -40,15 +18,15 @@ require(['jquery', 'dat', 'Sketch', 'Circuit'], function ($, dat, Sketch, Circui
   window.onload = function () {
     Sketch.create({
       setup: function() {
-        this.r = this.g = this.b = random( 100, 200 );
+//        this.r = this.g = this.b = random( 100, 200 );
       },
       mousemove: function() {
         this.r = 255 * ( this.mouse.x / this.width );
         this.g = 255 * ( this.mouse.y / this.height );
-        this.b = 255 * abs( cos( PI * this.mouse.y / this.width ) );
+//        this.b = 255 * abs( cos( PI * this.mouse.y / this.width ) );
       },
       draw: function() {
-        this.fillStyle = 'rgb(' + ~~this.r + ',' + ~~this.g + ',' + ~~this.b + ')';
+//        this.fillStyle = 'rgb(' + ~~this.r + ',' + ~~this.g + ',' + ~~this.b + ')';
         this.fillRect( 0, 0, this.width, this.height );
       }
     });
@@ -71,7 +49,7 @@ require(['jquery', 'dat', 'Sketch', 'Circuit'], function ($, dat, Sketch, Circui
     // Choose from named values
     gui.add(text, 'speed', { Stopped: 0, Slow: 0.1, Fast: 5 });
 
-    var f1 = gui.addFolder('Flow Field');
+//    var f1 = gui.addFolder('Flow Field');
     var f2 = gui.addFolder('Letters');
 
     f2.open();
@@ -83,11 +61,11 @@ require(['jquery', 'dat', 'Sketch', 'Circuit'], function ($, dat, Sketch, Circui
 
     speedControl.onChange(function (value) {
       // Fires on every change, drag, keypress, etc.
-      console.log("Controller change!");
+      console.log('Controller changed: ' + value);
     });
 
     speedControl.onFinishChange(function (value) {
-      console.log("Controller finish change!");
+      console.log('Controller finish change: ' + value);
     });
 
     var update = function () {
@@ -96,7 +74,5 @@ require(['jquery', 'dat', 'Sketch', 'Circuit'], function ($, dat, Sketch, Circui
     };
 
     update();
-
-    console.log(Circuit);
   };
 });
