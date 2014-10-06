@@ -2,8 +2,8 @@ require.config({
   paths: {
     'jquery': '../../bower_components/jquery/dist/jquery',
     'dat': '../../bower_components/dat-gui/build/dat.gui',
-    'Sketch': '../../bower_components/sketch.js/js/sketch'
-//    'Circuit': './Circuit'
+    'Sketch': '../../bower_components/sketch.js/js/sketch',
+    'Circuit': '/scripts/Circuit'
   },
   shim: {
     'jquery': {
@@ -17,11 +17,15 @@ require.config({
     'Sketch': {
       deps: [],
       exports: 'Sketch'
+    },
+    'Circuit': {
+      deps: [],
+      exports: 'Circuit'
     }
   }
 });
 
-require(['jquery', 'dat', 'Sketch'], function ($, dat, Sketch) {
+require(['jquery', 'dat', 'Sketch', 'Circuit'], function ($, dat, Sketch, Circuit) {
   var FizzyText = function () {
     this.message = 'dat.gui';
     this.speed = 0.8;
@@ -92,5 +96,7 @@ require(['jquery', 'dat', 'Sketch'], function ($, dat, Sketch) {
     };
 
     update();
+
+    console.log(Circuit);
   };
 });
