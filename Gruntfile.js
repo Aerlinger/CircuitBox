@@ -15,6 +15,7 @@ module.exports = function (grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
+  grunt.loadNpmTasks('grunt-requirejs');
 
   // Configurable paths
   var config = {
@@ -248,6 +249,17 @@ module.exports = function (grunt) {
       }
     },
 
+    requirejs: {
+      dist: {
+        options: {
+          baseUrl        : '<%= config.app %>/scripts/',
+          name           : 'main',
+          mainConfigFile : '<%= config.app %>/scripts/main.js',
+          out            : '.tmp/concat/scripts/main.js'
+        }
+      }
+    },
+
     // By default, your `index.html`'s <!-- Usemin block --> will take care
     // of minification. These next options are pre-configured if you do not
     // wish to use the Usemin blocks.
@@ -363,12 +375,15 @@ module.exports = function (grunt) {
     ]);
   });
 
+  grunt.registerTask('build-rjs', ['requirejs:dist']);
+
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'requirejs:dist',
     'concat',
     'cssmin',
     'uglify',
@@ -383,4 +398,5 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
 };

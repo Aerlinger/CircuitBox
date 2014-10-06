@@ -6,6 +6,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
+
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -58,6 +60,10 @@
 
     <!--</div>-->
 
+    <div id="test">
+
+    </div>
+
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -88,13 +94,16 @@
         <script src="bower_components/bootstrap/js/scrollspy.js"></script>
         <script src="bower_components/bootstrap/js/collapse.js"></script>
         <script src="bower_components/bootstrap/js/tab.js"></script>
+        <script src="bower_components/requirejs/require.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
-        <script src="scripts/dat.gui.js"></script>
+
+        <!--<script src="../.tmp/dat.gui.js"></script>-->
 
         <script type="text/javascript">
+          /*
           var FizzyText = function() {
             this.message = 'dat.gui';
             this.speed = 0.8;
@@ -166,10 +175,10 @@
             };
 
             update();
-
 //            var customContainer = document.getElementById('my-gui-container');
 //            customContainer.appendChild(gui.domElement);
           };
+          */
         </script>
         <!-- endbuild -->
 </body>
